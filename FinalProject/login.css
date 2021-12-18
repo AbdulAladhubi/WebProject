@@ -276,6 +276,16 @@ textarea.input {
   right: 50%;
   transform: translate(-40%, 38%);
 }
+.big-circle2 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+
+  bottom: 55%;
+  right: 70%;
+  transform: translate(-40%, 38%);
+}
 
 .big-circle:after {
   content: "";
