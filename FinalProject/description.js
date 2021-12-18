@@ -17,7 +17,7 @@ productDescription.innerHTML=`${localStorage.getItem("description")}`;
 // This is added in each description button it will cehck what product is selected and based on it it will display the description of the product
 function processProduct(productno){
 
-    fetch('furniture2.json')
+    fetch('items.json')
     .then(response => response.json())
     .then(data => {
 //save the product selected details to local storage

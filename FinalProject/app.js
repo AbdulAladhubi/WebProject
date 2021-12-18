@@ -53,7 +53,7 @@ document.getElementById('checkoutTotal').innerHTML=`${localStorage.getItem("Tota
 // load product items content form JSON file
 async function loadJSON() {
     if (document.querySelector('.cart-list') != null) {
-        fetch('furniture2.json')
+        fetch('items.json')
             .then(response => response.json())
             .then(data => {
                 //let html = '';
