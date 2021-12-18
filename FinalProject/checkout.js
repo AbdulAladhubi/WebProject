@@ -7,6 +7,19 @@ var CreditCardNumbers = [123456789, 47432456, 08664331];
 var ExpirationDates = ["11/23", "11/24", "11/25"];
 var CVVcodes = ["123", "456", "789"];
 
+// // Getting the elemnts of the form to check if they are beign filled for more security
+// const emailPayPal=document.getElementById('emailPayPal');
+// const cvv=document.getElementById('cc-cvv');
+// const CreditCardExpiry=document.getElementById('cc-expiration');
+// const PayPalPassword=document.getElementById('PayPalPassword');
+// const creditCardNum=document.getElementById('cc-number');
+// const state=document.getElementById('state');
+// const country=document.getElementById('country');
+// const address=document.getElementById('emailPayPal');
+// const emailPayPal=document.getElementById('emailPayPal');
+
+
+
 //Check which raduio button what option is selected (Credit card/PayPal) is selected
 var eles = document.getElementsByName('paymentMethod');
 
@@ -72,14 +85,6 @@ function StoreFormData() {
   localStorage.setItem("TotalPrice", TotalPrice);
 
   //Now i put them all in variables to be esier for me to use them later in the feature a
-  var FirstName = localStorage.getItem("firstName");
-  var LastName = localStorage.getItem("lastName");
-  var EmailAddress = localStorage.getItem("email");
-  var Address = localStorage.getItem("address");
-  var Address2 = localStorage.getItem("address2");
-  var CountryName = localStorage.getItem("country");
-  var StateName = localStorage.getItem("state");
-  var ZipCode = localStorage.getItem("zip");
   var TheTotalPrice = localStorage.getItem("TotalPrice");
 
 }
@@ -127,6 +132,7 @@ function CheckPayPalPayment() {
       document.getElementById('inValidPayment').classList.remove('d-none');
       document.getElementById('invalidPayMessage').innerHTML = `PayPal email or password is wrong!`;
       localStorage.setItem("ValidCheckout", 0);
+      event.preventDefault();
     }
 
   }
@@ -154,6 +160,7 @@ function CheckCreditCardPayment() {
       document.getElementById('inValidPayment').classList.remove('d-none');
       document.getElementById('invalidPayMessage').innerHTML = `Credit card details are invalid!`;
       localStorage.setItem("ValidCheckout", 1);
+      event.preventDefault();
 
     }
 
@@ -168,19 +175,21 @@ document.getElementById('paypal').addEventListener('click', () => {
   document.getElementById('payPalButton').classList.remove('d-none');
 });
 
+var chekcoutStatus = document.getElementById('chekcoutStatus');
+// add a listener for add to cart if such a button id is pressed
+
+
 //This function will validate if te paypal payment is valid or not and if not will display a message that there is something wrong
 function ValidatePAyPal() {
 
   localStorage.setItem("PaymentMethodIndex", 1);
   CheckPayPalPayment();
 
-
-
   if (localStorage.getItem("ValidCheckout") == 1) {
 
-    sweetAlert();
+    chekcoutStatus.addEventListener("submit", sweetAlert);
   }
-  event.preventDefault();
+ 
 
 }
 
@@ -199,16 +208,18 @@ function ValidateCreditCard() {
 
   if (localStorage.getItem("ValidCheckout") == 0) {
 
-    sweetAlert();
+    chekcoutStatus.addEventListener("submit", sweetAlert);
   }
 
 }
 
 
 
-var chekcoutStatus = document.getElementById('chekcoutStatus');
-// add a listener for add to cart if such a button id is pressed
-chekcoutStatus.addEventListener("submit", sweetAlert);
+
+
+
+
+// Checking if the inputs are filled 
 
 
 // The alert function will display the amazing message and then will display the confirmation message
